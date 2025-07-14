@@ -1,0 +1,71 @@
+<!-- صفحة الفيديوهات -->
+<!-- file: videos.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VID-G | الفيديوهات</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-icon">🏠</div>
+    <input type="text" placeholder="ابحث عن فيديو..." class="search-bar">
+    <div class="nav-icon" onclick="goToProfile()">👤</div>
+  </header>
+
+  <main class="grid-container">
+    <!-- إعلان -->
+    <div class="ad-banner">إعلان هنا</div>
+
+    <!-- صور -->
+    <section class="image-section">
+      <h3>معرض الصور</h3>
+      <div class="images-grid" id="imagesGrid"></div>
+    </section>
+
+    <!-- فيديوهات -->
+    <section class="videos-section">
+      <h3>الفيديوهات</h3>
+      <div class="videos-grid" id="videosGrid"></div>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js"></script>
+  <script>
+    const storage = firebase.storage();
+
+    function loadMedia(folder, containerId, type) {
+      const container = document.getElementById(containerId);
+      const storageRef = storage.ref(folder);
+      storageRef.listAll().then(result => {
+        result.items.forEach(itemRef => {
+          itemRef.getDownloadURL().then(url => {
+            const mediaElement = document.createElement(type);
+            if (type === 'img') {
+              mediaElement.src = url;
+              mediaElement.className = 'media-image';
+            } else if (type === 'video') {
+              mediaElement.src = url;
+              mediaElement.controls = true;
+              mediaElement.className = 'media-video';
+            }
+            container.appendChild(mediaElement);
+          });
+        });
+      });
+    }
+
+    window.onload = () => {
+      loadMedia('images', 'imagesGrid', 'img');
+      loadMedia('videos', 'videosGrid', 'video');
+    }
+
+    function goToProfile() {
+      window.location.href = "profile.html";
+    }
+  </script>
+</body>
+</html>
