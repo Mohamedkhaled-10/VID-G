@@ -7,6 +7,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VID-G | بروفايلي</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Firebase v8.10.1 - النسخة المتوافقة مع HTML عادي -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCzPwvaqM8bxj67YTh8vPjJ4LVDZtw-cps",
+    authDomain: "vid-g-7a5d3.firebaseapp.com",
+    projectId: "vid-g-7a5d3",
+    storageBucket: "vid-g-7a5d3.appspot.com",
+    messagingSenderId: "770109111943",
+    appId: "1:770109111943:web:85ee383b95b539b2dac222",
+    measurementId: "G-KKTRGX9MCX"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+</script>
+
 </head>
 <body>
   <header class="navbar">
